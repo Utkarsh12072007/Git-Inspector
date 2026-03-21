@@ -1,16 +1,61 @@
-# React + Vite
+# 👨‍💻 GitHub User Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Project Overview
+The GitHub User Explorer is a web application that allows users to search for GitHub profiles and explore their repositories. This project demonstrates the use of JavaScript, API integration, and dynamic UI rendering.
 
-Currently, two official plugins are available:
+The application fetches real-time data from the GitHub API and displays user information along with their repositories in a structured and user-friendly interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🎯 Purpose of the Project
+The main objective of this project is to:
+- Understand how to work with public APIs using fetch()
+- Practice JavaScript concepts like map, filter, and sort
+- Build a responsive and interactive user interface
+- Apply clean coding practices and proper project structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🌐 API Used
+This project uses the **GitHub Public API** to fetch data.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Get User Details:
+  https://api.github.com/users/{username}
+
+- Get User Repositories:
+  https://api.github.com/users/{username}/repos
+
+---
+
+## ✨ Planned Features
+The following features will be implemented in this project:
+
+### 🔍 Search
+- Search GitHub users by username
+
+### 👤 User Profile
+- Display user avatar, username, and repository count
+
+### 📁 Repository List
+- Show all repositories of the selected user
+
+### 🎯 Filtering
+- Filter repositories based on programming language
+
+### 🔃 Sorting
+- Sort repositories by:
+  - Number of stars
+  - Repository name (alphabetical order)
+
+### 🎛️ Interactions
+- Buttons or dropdowns for filtering and sorting
+
+---
+
+## 🛠️ Technologies Used
+- HTML
+- Tailwind CSS
+- JavaScript (ES6)
+- React.js
+- Fetch API
+>>>>>>> 6bd82e2c12763f49542d580bf60a0f9d311aefb1
