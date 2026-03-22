@@ -1,10 +1,19 @@
 import react from "react";
-
+import { useState } from "react";
+import Hero from "./components/Hero";
+import SearchEngine from "./components/SearchEngine";
 let app = () => {
+    const [showSearch, setShowSearch] = useState(false);
+
+    const handleExploreClick = () => {
+        window.scrollTo({ top: 900, behavior: 'smooth' });
+        setShowSearch(true);
+    };
     return (
-        <div className="h-screen w-screen flex items-center justify-center">
-            <h1 className="text-4xl font-bold text-gray-800">Git Inspector</h1>
-        </div>
+        <>
+            <Hero onExploreClick={handleExploreClick} />
+            <SearchEngine />
+        </>
     );
 }
 
