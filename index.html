@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Inspector | GitHub Profile Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="script.js"></script>
+</head>
+<body class="bg-slate-100 text-slate-900 font-sans">
+
+    <section class="min-h-screen bg-white border-b border-slate-200">
+        <div class="max-w-5xl mx-auto px-6 py-12 min-h-screen flex flex-col">
+            <header class="flex items-center justify-between">
+                <div class="text-2xl font-bold">Git Inspector</div>
+                <a href="#profile-page" class="text-sm text-blue-600 hover:text-blue-700">View profile data</a>
+            </header>
+
+            <div class="flex-1 flex items-center py-12">
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6 max-w-3xl">
+                        A simple GitHub profile inspector for viewing public user information.
+                    </h1>
+                    <p class="text-lg text-slate-600 max-w-3xl mb-8 leading-8">
+                        Discover GitHub profiles instantly with real-time data using the GitHub API.
+Enter any username to explore repositories, followers, bio, and key account details in a clean, simple interface.
+                    </p>
+                    <div class="grid sm:grid-cols-3 gap-4 max-w-3xl mb-10">
+                        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
+                            <p class="font-semibold mb-1">Live API Data</p>
+                            <p class="text-sm text-slate-600">Fetches real GitHub profile information.</p>
+                        </div>
+                        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
+                            <p class="font-semibold mb-1">Two Page Layout</p>
+                            <p class="text-sm text-slate-600">Description first, user data second.</p>
+                        </div>
+                        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
+                            <p class="font-semibold mb-1">Profile Details</p>
+                            <p class="text-sm text-slate-600">Shows account stats and public details.</p>
+                        </div>
+                    </div>
+                    <a href="#profile-page" class="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition">
+                        Go to user data
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main id="profile-page" class="min-h-screen px-6 py-16">
+        <div class="max-w-5xl mx-auto">
+            <div class="max-w-3xl mb-10">
+                <!-- <p class="text-sm uppercase tracking-[0.2em] text-blue-600 mb-4">Page 02</p> -->
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">GitHub user data</h2>
+                <p class="text-lg text-slate-600 leading-8">
+                    Enter a GitHub username and click "Inspect Profile" to view public details like repositories, followers, bio, and more.
+It shows key info such as account date, location, company, links, and user ID.
+                </p>
+            </div>
+
+            <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-200 flex flex-col md:flex-row gap-3 mb-8">
+                <input type="text" id="usernameInput" value="Utkarsh12072007" placeholder="Enter GitHub username"
+                    class="flex-1 px-4 py-3 outline-none text-slate-700 bg-transparent text-lg">
+                <button id="inspectButton" onclick="fetchGitHubUser()" class="bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition">
+                    Inspect Profile
+                </button>
+            </div>
+
+            <div id="resultCard" class="hidden bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+                <div class="md:grid md:grid-cols-[280px_1fr]">
+                    <div class="bg-slate-900 p-8 text-center text-white">
+                        <img id="userAvatar" src="" alt="Avatar" class="w-28 h-28 rounded-full mx-auto border-4 border-slate-700 mb-4 object-cover">
+                        <h2 id="userName" class="text-2xl font-bold"></h2>
+                        <p id="userLogin" class="text-slate-400 mb-4"></p>
+                        <a id="profileLink" target="_blank" class="inline-block bg-blue-600 text-sm px-4 py-2 rounded-md hover:bg-blue-500 transition">View Profile</a>
+                    </div>
+
+                    <div class="p-8">
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                            <div class="rounded-xl bg-slate-50 p-4 border border-slate-200">
+                                <p class="text-xs font-bold uppercase text-slate-400 mb-1">Public Repos</p>
+                                <p id="repoCount" class="text-2xl font-bold text-slate-900"></p>
+                            </div>
+                            <div class="rounded-xl bg-slate-50 p-4 border border-slate-200">
+                                <p class="text-xs font-bold uppercase text-slate-400 mb-1">Followers</p>
+                                <p id="followerCount" class="text-2xl font-bold text-slate-900"></p>
+                            </div>
+                            <div class="rounded-xl bg-slate-50 p-4 border border-slate-200">
+                                <p class="text-xs font-bold uppercase text-slate-400 mb-1">Following</p>
+                                <p id="followingCount" class="text-2xl font-bold text-slate-900"></p>
+                            </div>
+                            <div class="rounded-xl bg-slate-50 p-4 border border-slate-200">
+                                <p class="text-xs font-bold uppercase text-slate-400 mb-1">Joined On</p>
+                                <p id="joinDate" class="text-lg font-bold text-slate-900"></p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="border border-slate-200 rounded-xl p-5">
+                                <p class="text-sm font-semibold text-slate-900 mb-3">About</p>
+                                <div class="space-y-3 text-slate-700">
+                                    <div>
+                                        <p class="text-xs uppercase text-slate-400">Bio</p>
+                                        <p id="userBio">No bio available.</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs uppercase text-slate-400">Company</p>
+                                        <p id="userCompany">Not available</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs uppercase text-slate-400">Location</p>
+                                        <p id="userLocation">Not available</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs uppercase text-slate-400">Account Type</p>
+                                        <p id="userType">Not available</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border border-slate-200 rounded-xl p-5">
+                                <p class="text-sm font-semibold text-slate-900 mb-3">Links and Account Info</p>
+                                <div class="space-y-3 text-slate-700">
+                                    <div>
+                                        <p class="text-xs uppercase text-slate-400">Blog / Website</p>
+                                        <a id="userBlog" href="#" target="_blank" class="text-blue-600 hover:underline">Not available</a>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs uppercase text-slate-400">Twitter / X</p>
+                                        <p id="userTwitter">Not available</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs uppercase text-slate-400">Email</p>
+                                        <p id="userEmail">Not available</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs uppercase text-slate-400">User ID</p>
+                                        <p id="userId">Not available</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="errorMessage" class="hidden text-center py-10">
+                <p class="text-red-600 font-medium text-lg">User not found. Please check the spelling.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-10 text-slate-500 text-sm bg-slate-100">
+        Git Inspector © 2026 | Built for Learning & Exploration
+    </footer>
+</body>
+</html>
